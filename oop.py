@@ -1,31 +1,47 @@
-# здесь пишите программу
-class CPU:
-    def __init__(self, name, fr):
+class Cart:
+    def __init__(self):
+        self.goods = []
+
+    def add(self, gd):
+        self.goods.append(gd)
+
+    def remove(self, indx):
+        self.goods.pop(indx)
+
+    def get_list(self):
+        return [f"{gd.name}: {gd.price}" for gd in self.goods]
+
+
+class Product:
+    def __init__(self, name, price):
         self.name = name
-        self.fr = fr
+        self.price = price
 
 
-class Memory:
-    def __init__(self, name, volume):
-        self.name = name
-        self.volume = volume
+class Table(Product):
+    pass
 
 
-class MotherBoard:
-    def __init__(self, name, cpu: object, *args):
-        self.name = name
-        self.cpu = cpu
-        self.mem_slots = args[:]
-        self.total_mem_slots = 4
-
-    def get_config(self):
-        return [f"Материнская плата: {self.name}",
-                f"Центральный процессор: {self.cpu.name}, {self.cpu.fr}",
-                f"Слотов памяти: {self.total_mem_slots}",
-                f"Память: {'; '.join([f'{i.name} - {i.volume}' for i in self.mem_slots])}"]
+class TV(Product):
+    pass
 
 
-cpu1 = CPU("Intel", 1333)
-mem1, mem2 = Memory("Kingston", 4000), Memory("Kingston", 4000)
-mb = MotherBoard("Asus", cpu1, mem1, mem2)
-print(mb.get_config())
+class Notebook(Product):
+    pass
+
+
+class Cup(Product):
+    pass
+
+
+tv1 = TV('Sony', 19999)
+tv2 = TV('LG', 234324)
+table = Table('Super', 299)
+cup = Cup('Appetite', 19)
+cart = Cart()
+cart.add(tv1)
+cart.add(tv2)
+cart.add(table)
+cart.add(cup)
+
+print(cart.get_list())
